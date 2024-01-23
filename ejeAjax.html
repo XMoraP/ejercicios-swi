@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Ejemplo</title>
+</head>
+<body>
+    <div id="datos-container">
+        <!-- Aquí se mostrarán los datos obtenidos mediante AJAX -->
+    </div>
+
+    <script>
+        // Crear un objeto XMLHttpRequest
+        let xhr = new XMLHttpRequest();
+
+        // Configurar la solicitud
+        xhr.open("GET", "https://jsonplaceholder.typicode.com/todos/1", true);
+
+        // Manejar el evento onload (cuando la solicitud se completa)
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                // Manejar la respuesta exitosa
+                let datos = JSON.parse(xhr.responseText);
+
+                // Actualizar la página con los datos obtenidos
+                document.getElementById("datos-container").innerHTML = `UserID: ${datos.userId}, Título: ${datos.title}`;
+            } else {
+                // Manejar errores
+                console.error("Error en la solicitud");
+            }
+        };
+
+        // Enviar la solicitud
+        xhr.send();
+    </script>
+</body>
+</html>
